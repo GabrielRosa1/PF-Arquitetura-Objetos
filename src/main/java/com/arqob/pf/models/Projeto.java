@@ -1,14 +1,14 @@
 package com.arqob.pf.models;
+
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "projetos")
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Projeto {
@@ -17,7 +17,19 @@ public class Projeto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private String descricao;
 
+    @ManyToMany
+    @JoinTable(
+            name = "projeto_usuarios",
+            joinColumns = @JoinColumn(name = "projeto_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<User> usuarios = new ArrayList<>();
 }

@@ -1,0 +1,257 @@
+{
+  "info": {
+    "name": "PF - Arquitetura de Objetos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "admin_id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Listar todos os usuários",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": ["{{base_url}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Buscar usuário por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar usuário (livre) - ADMIN",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"admin\",\n  \"cpf\": \"000.000.000-00\",\n  \"papel\": \"ADMIN\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": ["{{base_url}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Criar usuário (livre) - USER",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"user teste\",\n  \"cpf\": \"111.111.111-11\",\n  \"papel\": \"USER\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": ["{{base_url}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Editar usuário (ADMIN)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-USER-ID",
+                "value": "{{admin_id}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"user teste editado\",\n  \"cpf\": \"111.111.111-11\",\n  \"papel\": \"USER\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users/2",
+              "host": ["{{base_url}}"],
+              "path": ["users", "2"]
+            }
+          }
+        },
+        {
+          "name": "Deletar usuário (ADMIN)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-USER-ID",
+                "value": "{{admin_id}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/2",
+              "host": ["{{base_url}}"],
+              "path": ["users", "2"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projetos",
+      "item": [
+        {
+          "name": "Listar todos os projetos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/projetos",
+              "host": ["{{base_url}}"],
+              "path": ["projetos"]
+            }
+          }
+        },
+        {
+          "name": "Buscar projeto por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/projetos/1",
+              "host": ["{{base_url}}"],
+              "path": ["projetos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar projeto (ADMIN)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-USER-ID",
+                "value": "{{admin_id}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"prova final\",\n  \"descricao\": \"descricao da prova final\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projetos",
+              "host": ["{{base_url}}"],
+              "path": ["projetos"]
+            }
+          }
+        },
+        {
+          "name": "Editar projeto (ADMIN)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-USER-ID",
+                "value": "{{admin_id}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"prova final editada\",\n  \"descricao\": \"nova descricao\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projetos/1",
+              "host": ["{{base_url}}"],
+              "path": ["projetos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar projeto (ADMIN)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-USER-ID",
+                "value": "{{admin_id}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/projetos/1",
+              "host": ["{{base_url}}"],
+              "path": ["projetos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Adicionar usuário ao projeto (ADMIN)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-USER-ID",
+                "value": "{{admin_id}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/projetos/1/usuarios/2",
+              "host": ["{{base_url}}"],
+              "path": ["projetos", "1", "usuarios", "2"]
+            }
+          }
+        },
+        {
+          "name": "Remover usuário do projeto (ADMIN)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-USER-ID",
+                "value": "{{admin_id}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/projetos/1/usuarios/2",
+              "host": ["{{base_url}}"],
+              "path": ["projetos", "1", "usuarios", "2"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

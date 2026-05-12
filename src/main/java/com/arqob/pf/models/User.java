@@ -8,8 +8,6 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class User {
 
     public enum Papel {
@@ -21,7 +19,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
+
+    @Column(unique = true, nullable = false)
     private String cpf;
 
     @Enumerated(EnumType.STRING)
